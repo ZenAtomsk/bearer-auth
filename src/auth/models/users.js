@@ -9,7 +9,7 @@ const SECRET = process.env.SECRET;
 
 
 
-const users = mongoose.Schema({
+const users = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 }, { toJSON: { virtuals: true } });
@@ -41,7 +41,7 @@ users.statics.authenticateBasic = async function (username, password) {
 users.statics.authenticateWithToken = async function (token) {
   try {
     const parsedToken = jwt.verify(token, SECRET);
-    const user = this.findOne({ username: parsedToken.username })
+    const user = await this.findOne({ username: parsedToken.username })
     if (user) { return user; }
     throw new Error("User Not Found");
   } catch (e) {
