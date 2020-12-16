@@ -1,9 +1,10 @@
 'use strict';
-
+//library that mocks our database
 require('@code-fellows/supergoose');
 const middleware = require('../../../src/auth/middleware/basic.js');
 const Users = require('../../../src/auth/models/users.js');
 
+//create an admin user ang give the a username and password
 let users = {
   admin: { username: 'admin', password: 'password' },
 };
